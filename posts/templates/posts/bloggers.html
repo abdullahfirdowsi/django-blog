@@ -1,0 +1,96 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card {
+    width: 500px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff
+}
+
+.stats {
+    background: #f2f5f8 !important;
+    color: #000 !important
+}
+
+.articles {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number1 {
+    font-weight: 500
+}
+
+.followers {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number2 {
+    font-weight: 500
+}
+
+.rating {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number3 {
+    font-weight: 500
+}
+.things {
+  border-radius: 50% !important;
+  width: 150px !important;
+  height: 150px !important;
+}
+</style>
+<div class="container mt-5 d-flex justify-content-center align-items-center flex-column">
+  {% for blogger in bloggers %}
+  <div class="card p-3 mb-3">
+      <div class="d-flex align-items-centerflex-column">
+          <div class="image"> <img src="{{blogger.avatar.url}}" class="rounded things" width="155"> </div>
+          <div class="ml-3 w-100">
+              <h4 class="mb-0 mt-0">{{blogger.user}}</h4> <span>{{blogger.twitter}}</span>
+              <div class="p-2 mt-2 bg-primary d-flex justify-content-around rounded text-white stats">
+                  <div class="d-flex flex-column align-items-center"> <span class="articles">Posts</span> <span class="number1">{{blogger.post_set.all.count}}</span> </div>
+                  <div class="d-flex flex-column"> <span class="followers">Joined</span> <span class="number2">{{blogger.joined}}</span> </div>                  
+              </div>
+              <div class="button mt-2 d-flex flex-row align-items-center"> <a href="{% url 'blogger-detail' blogger.user.id %}"><button class="btn btn-sm btn-primary w-100 ml-2">View Bio</button></a> </div>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+  <nav aria-label="Pagination">
+    <hr class="my-0" />
+    {% if bloggers.has_other_pages %}
+      <ul class="pagination justify-content-center my-4">
+        {% if bloggers.has_previous %}
+        <li class="page-item"><a data-page="{{bloggers.previous_page_number}}" href="?page={{bloggers.previous_page_number}}" class="page-link">&laquo</a></li>
+
+        <li class="page-item"><a data-page="1" href="?page=1" class="page-link">First</a></li>
+      {% endif %}
+
+
+      {% for i in bloggers.paginator.page_range %}
+        {% if bloggers.number == i %}
+          <li class="page-item"><a class="active page-link">{{i}}</a></li>
+        {% else %}
+          <li class="page-item"><a data-page="{{i}}" href="?page={{i}}" class="page-link">{{i}}</a></li>
+        {% endif %}
+        
+      {% endfor %}
+
+
+      {% if bloggers.has_next %}
+        <li class="page-item"><a data-page="{{bloggers.paginator.num_pages}}" href="?page={{bloggers.paginator.num_pages}}" class="page-link">Last</a></li>
+
+        <li class="page-item"><a data-page="{{bloggers.next_page_number}}" href="?page={{bloggers.next_page_number}}" class="page-link">&raquo</a></li>
+      {% endif %}
+      </ul>
+    {% endif %}
+</nav>
+</div>
+{% endblock content %}

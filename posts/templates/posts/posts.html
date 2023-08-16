@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<style>
+  header {
+    background-image: url("https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683_960_720.png"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 500px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  }
+</style>
+<!-- Page header with logo and tagline-->
+<header class="py-5 mb-4">
+  <div class="container">
+      <div class="text-center my-5">
+          <h1 class="fw-bolder">Welcome to Django Blog!</h1>
+          <p class="lead mb-0">Everything you wanted to know about Django.</p>
+      </div>
+  </div>
+</header>
+<!-- Page content-->
+<div class="container">
+  <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+          <!-- Featured blog post-->
+          {% for post in posts %}
+          <div class="card mb-4" style="width:100%">
+              <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="..." />
+              <div class="card-body">
+                  <div class="small text-muted">{{post.created}}</div>
+                  <h2 class="card-title">{{post.headline}}</h2>
+                  <p class="card-text">{{post.sub_headline}}</p>
+                  <a class="btn btn-primary" href="{% url 'post-detail' post.pk %}">Read more →</a>
+              </div>
+              <div class="card-footer">
+                <small class="">Posted by: {{post.author.user.username}}</small>
+              </div>
+          </div>
+          {% endfor %}
+          <!-- Pagination-->
+          <nav aria-label="Pagination">
+              <hr class="my-0" />
+              {% if posts.has_other_pages %}
+                <ul class="pagination justify-content-center my-4">
+                  {% if posts.has_previous %}
+                  <li class="page-item"><a data-page="{{posts.previous_page_number}}" href="?page={{posts.previous_page_number}}" class="page-link">&laquo</a></li>
+        
+                  <li class="page-item"><a data-page="1" href="?page=1" class="page-link">First</a></li>
+                {% endif %}
+        
+        
+                {% for i in posts.paginator.page_range %}
+                  {% if posts.number == i %}
+                    <li class="page-item"><a class="active page-link">{{i}}</a></li>
+                  {% else %}
+                    <li class="page-item"><a data-page="{{i}}" href="?page={{i}}" class="page-link">{{i}}</a></li>
+                  {% endif %}
+                  
+                {% endfor %}
+        
+        
+                {% if posts.has_next %}
+                  <li class="page-item"><a data-page="{{posts.paginator.num_pages}}" href="?page={{posts.paginator.num_pages}}" class="page-link">Last</a></li>
+        
+                  <li class="page-item"><a data-page="{{posts.next_page_number}}" href="?page={{posts.next_page_number}}" class="page-link">&raquo</a></li>
+                {% endif %}
+                </ul>
+              {% endif %}
+          </nav>
+      </div>
+      <!-- Side widgets-->
+      <div class="col-lg-4">
+         {% include 'aside.html' %}
+      </div>
+  </div>
+</div>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-lg-8">
+          <!-- Post content-->
+          <article>
+              <!-- Post header-->
+              <header class="mb-4">
+                  <!-- Post title-->
+                  <h1 class="fw-bolder mb-1">{{post.headline}}</h1>
+                  <!-- Post meta content-->
+                  <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by <a href="{% url 'blogger-detail' post.author.pk %}">{{post.author.user}}</a></div>
+                  <!-- Post categories-->
+                  {% for selftag in selftags %}
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{selftag.name}}</a>
+                  {% endfor %}
+                </header>
+              <!-- Preview image figure-->
+              <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.thumbnail.url }}" alt="..." /></figure>
+              <!-- Post content-->
+              <section class="mb-5">
+                  <p class="fs-5 mb-4">{{post.body}}</p>
+                  
+              </section>
+          </article>
+          <!-- Comments section-->
+          <section class="mb-5">
+              <div class="card bg-light">
+                  <div class="card-body">
+                      <!-- Comment form-->
+                      {% if request.user.is_authenticated %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <textarea required class="form-control" placeholder="Leave a comment..." name="comment"></textarea>
+                            <br>
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </form>
+                        {% else %}
+                            <p>Create an account to comment:</p>
+                            <a class="btn btn-primary" href="{% url 'signup' %}">Register/Login</a>
+                        {% endif %}
+                      <!-- Single comment-->
+                      {% for comment in post.postcomment_set.all %}
+                            <div class="comment">
+                                <img class="author-pic" src="{{comment.author.profile_pic.url}}">
+                                <div>
+                                    <p class="comment-author">{{comment.author}}: {{comment.created|date:"M-d-Y"}}</p>
+                                    <p class="comment-body">{{comment.body}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                  </div>
+              </div>
+          </section>
+      </div>
+      <!-- Side widgets-->
+      <div class="col-lg-4">
+        {% include 'aside.html' %}
+      </div>
+  </div>
+</div>
+
+<script src="{% static 'js/scripts2.js' %}"></script>
+{% endblock content %}
