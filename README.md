@@ -1,20 +1,8 @@
-# README
-
 # Django Blog
 
 >  A Blog built with Django where bloggers can signup/login, and perform CRUD operations for posts. Bloggers can search per tags or headlines and comment in posts.
 
 Additional description about the project and its features.
-
-Posts:
-![screenshot](./assets/screenshot.png)
-Create Post:
-![screenshot](./assets/screenshot2.png)
-Bloggers:
-![screenshot](./assets/screenshot3.png)
-Blogger
-![screenshot](./assets/screenshot4.png)
-
 
 ## Built With
 
@@ -29,14 +17,14 @@ Blogger
 ## Getting Started
 ### Usage
 To have this app on your pc, you need to:
-* [download](https://github.com/javitocor/Blog-Django/archive/main.zip) or clone this repo:
+* [download](https://github.com/abdullahfirdowsi/django-blog/archive/main.zip) or clone this repo:
   - Clone with SSH:
   ```
-    git@github.com:javitocor/Blog-Django.git
+    git@github.com:abdullahfirdowsi/django-blog.git
   ```
   - Clone with HTTPS
   ```
-    https://github.com/javitocor/Blog-Django.git
+    https://github.com/abdullahfirdowsi/django-blog.git
   ```
 
 * In the project directory, you can run:
@@ -70,18 +58,12 @@ Access the page by typing in your web browser
    http://127.0.0.1:8000/
 ```
 
-## Author
-
-👤 Javier Oriol Correas Sanchez Cuesta 
-- Github: [@javitocor](https://github.com/javitocor) 
-- Twitter: [@JavierCorreas4](https://twitter.com/JavierCorreas4) 
-- Linkedin: [Javier Oriol Correas Sanchez Cuesta](https://www.linkedin.com/in/javier-correas-sanchez-cuesta-15289482/) 
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/javitocor/Blog-Django/issues).
+Feel free to check the [issues page](https://github.com/abdullahfirdowsi/django-blog/issues).
 
 ## Show your support
 
@@ -95,14 +77,3 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/javitocor/Blog-Django.svg?style=flat-square
-[contributors-url]: https://github.com/javitocor/Blog-Django/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/javitocor/Blog-Django.svg?style=flat-square
-[forks-url]: https://github.com/javitocor/Blog-Django/network/members
-[stars-shield]: https://img.shields.io/github/stars/javitocor/Blog-Django.svg?style=flat-square
-[stars-url]: https://github.com/javitocor/Blog-Django/stargazers
-[issues-shield]: https://img.shields.io/github/issues/javitocor/Blog-Django.svg?style=flat-square
-[issues-url]: https://github.com/javitocor/Blog-Django/issuesover:
